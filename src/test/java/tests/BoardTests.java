@@ -38,9 +38,27 @@ public class BoardTests {
     }
 
     @Test
-    public void name() {
+    public void given_a_triangle_board_with_one_dead_cell_should_return_2x2_board_with_all_alive_cells() {
         Board board = new Board(Cases.triangleAlive2x2).next();
         assertThat(board.state()).isEqualTo(Cases.allAlive2x2);
+    }
+
+    @Test
+    public void given_a_triangle_board_with_one_alive_cell_should_return_2x2_board_with_all_dead_cells() {
+        Board board = new Board(Cases.triangleDead2x2).next();
+        assertThat(board.state()).isEqualTo(Cases.allDead2x2);
+    }
+
+    @Test
+    public void given_a_line_structure_2x2_should_return_all_dead_cells() {
+        Board board = new Board(Cases.line2x2).next();
+        assertThat(board.state()).isEqualTo(Cases.allDead2x2);
+    }
+
+    @Test
+    public void given_a_triangle_structure_3x3_should_return_square_structure_3x3() {
+        Board board = new Board(Cases.triangle3x3).next();
+        assertThat(board.state()).isEqualTo(Cases.square3x3);
     }
 
     private class Cases {
@@ -53,5 +71,15 @@ public class BoardTests {
                                                 {"X", "X"}};
         public static String[][] triangleAlive2x2 = {{".", "X"},
                                                      {"X", "X"}};;
+        public static String[][] triangleDead2x2 = {{"X", "."},
+                                                    {".", "."}};
+        public static String[][] line2x2 = {{"X", "X"},
+                                            {".", "."}};
+        public static String[][] square3x3 = {{".", "X", "X"},
+                                              {".", "X", "X"},
+                                              {".", ".", "."}};
+        public static String[][] triangle3x3 = {{".", ".", "X"},
+                                                {".", "X", "X"},
+                                                {".", ".", "."}};
     }
 }
